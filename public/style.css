@@ -1,0 +1,153 @@
+:root {
+  --pink-bg: #f9ecea;
+  --pink-soft: #f6e3e1;
+  --pink: #d77a7a;
+  --pink-dark: #b85f5f;
+  --beige: #e9dcc9;
+  --beige-soft: #f4ede1;
+  --ink: #4a3f3a;
+  --ink-soft: #8a7d78;
+  --white: #fffdfb;
+  --gold: #c9a227;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--pink-bg);
+  color: var(--ink);
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+.page { max-width: 560px; margin: 0 auto; padding: 28px 20px 40px; }
+.hidden { display: none !important; }
+
+.brand { text-align: center; margin-bottom: 34px; }
+.brand-name { font-family: Georgia, "Times New Roman", serif; font-size: 30px; letter-spacing: 2px; }
+.brand-name span { color: var(--pink); }
+.brand-tag { font-size: 12px; letter-spacing: 1px; color: var(--ink-soft); margin-top: 2px; }
+
+h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 32px; line-height: 1.2; margin: 6px 0 14px; }
+h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 26px; margin: 6px 0 10px; }
+h3 { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-soft); margin: 28px 0 10px; }
+.lead { font-size: 16px; color: var(--ink-soft); margin: 0 0 22px; }
+.hint { font-size: 13px; color: var(--ink-soft); margin: 18px 0 0; text-align: center; }
+.hint a { color: var(--pink-dark); }
+
+.btn {
+  display: block; width: 100%;
+  background: var(--pink); color: #fff; border: none;
+  border-radius: 999px; padding: 15px 22px; margin: 10px 0;
+  font-size: 16px; cursor: pointer; text-align: center;
+}
+.btn:hover { background: var(--pink-dark); }
+.btn.big { font-size: 17px; padding: 17px 22px; }
+.btn.ghost { background: var(--white); color: var(--pink-dark); border: 1px solid var(--beige); }
+.btn.small { width: auto; display: inline-block; padding: 9px 16px; font-size: 14px; margin: 0; }
+.btn.danger { background: var(--white); color: #a33; border: 1px solid #e5b6b6; }
+.btn:disabled { opacity: .55; cursor: default; }
+
+.back { background: none; border: none; color: var(--pink-dark); font-size: 15px; cursor: pointer; padding: 0 0 12px; }
+.file-label { text-align: center; }
+
+label { display: block; font-size: 15px; margin: 16px 0 4px; }
+.optional { color: var(--ink-soft); font-size: 13px; }
+input[type="text"], input[type="date"], input[type="search"] {
+  width: 100%; padding: 14px 16px; margin-top: 6px;
+  border: 1px solid var(--beige); border-radius: 12px;
+  background: var(--white); font-size: 16px; color: var(--ink);
+}
+input:focus { outline: 2px solid var(--pink); outline-offset: 1px; }
+
+.error { color: #a33; background: #fbeeee; border-radius: 12px; padding: 10px 14px; }
+.ok { color: #2e6b34; background: #eef6ee; border-radius: 12px; padding: 10px 14px; }
+
+/* Tarjeta de sellos */
+.card {
+  background: var(--white);
+  border: 1px solid var(--beige);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(180, 120, 110, .10);
+}
+.card.small { padding: 20px; }
+.card-brand { font-family: Georgia, serif; font-size: 20px; letter-spacing: 2px; }
+.card-brand span { color: var(--pink); }
+.card-name { font-size: 22px; margin-top: 10px; }
+.card-code { font-size: 15px; letter-spacing: 2px; color: var(--ink-soft); margin-top: 2px; }
+.card-qr { margin: 18px auto 6px; max-width: 210px; }
+.card-qr svg { width: 100%; height: auto; display: block; }
+.card-qr-note { font-size: 13px; color: var(--ink-soft); }
+.stamps { display: flex; justify-content: center; gap: 9px; margin: 18px 0 6px; flex-wrap: wrap; }
+.stamps .dot {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 2px solid var(--beige); background: var(--beige-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: var(--pink-dark);
+}
+.stamps .dot.full { background: var(--pink); border-color: var(--pink); color: #fff; }
+.stamps .dot.gift { border-color: var(--gold); color: var(--gold); font-size: 17px; }
+.card-count { font-size: 15px; margin: 8px 0 0; }
+.card-gift { background: var(--beige-soft); border-radius: 12px; padding: 12px; margin-top: 14px; }
+.card-birthday { background: var(--pink-soft); border-radius: 12px; padding: 12px; margin-top: 10px; }
+
+.history { list-style: none; padding: 0; margin: 0; }
+.history li {
+  background: var(--white); border: 1px solid var(--beige);
+  border-radius: 12px; padding: 11px 14px; margin: 8px 0; font-size: 14px;
+}
+.history li small { display: block; color: var(--ink-soft); font-size: 12px; }
+
+/* PIN */
+.pin-dots { display: flex; justify-content: center; gap: 14px; margin: 22px 0; }
+.pin-dots span { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--pink); }
+.pin-dots span.on { background: var(--pink); }
+.pinpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 280px; margin: 0 auto; }
+.pinpad button {
+  background: var(--white); border: 1px solid var(--beige); border-radius: 50%;
+  width: 76px; height: 76px; font-size: 24px; color: var(--ink); cursor: pointer; justify-self: center;
+}
+
+/* Dueña */
+.owner-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.owner-actions { margin: 18px 0; }
+.birthdays { background: var(--white); border: 1px solid var(--beige); border-radius: var(--radius); padding: 16px 18px; margin: 10px 0; }
+.birthdays h3 { margin-top: 0; }
+.birthdays .bday { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--beige-soft); font-size: 15px; }
+.birthdays .bday:first-of-type { border-top: none; }
+.birthdays .today { color: var(--pink-dark); font-weight: 600; }
+
+.clients { list-style: none; padding: 0; margin: 0; }
+.clients li {
+  background: var(--white); border: 1px solid var(--beige);
+  border-radius: 14px; padding: 14px 16px; margin: 10px 0;
+}
+.clients .c-name { font-size: 17px; }
+.clients .c-meta { font-size: 13px; color: var(--ink-soft); margin: 2px 0 10px; }
+.clients .c-dots { display: flex; gap: 5px; margin: 4px 0 10px; }
+.clients .c-dots span { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--beige); background: var(--beige-soft); }
+.clients .c-dots span.full { background: var(--pink); border-color: var(--pink); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.row .btn { flex: 1; width: auto; margin: 4px 0; padding: 11px 10px; font-size: 14px; }
+.badge { display: inline-block; background: var(--pink-soft); color: var(--pink-dark); border-radius: 999px; padding: 2px 10px; font-size: 12px; margin-left: 6px; }
+
+.scan-box { background: var(--white); border: 1px solid var(--beige); border-radius: var(--radius); padding: 14px; text-align: center; }
+.scan-box video { width: 100%; border-radius: 12px; background: #222; }
+.detail-actions .btn { margin: 8px 0; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+  background: var(--ink); color: #fff; border-radius: 999px; padding: 12px 22px;
+  font-size: 15px; z-index: 50; max-width: 90vw; text-align: center;
+}
+.foot { text-align: center; color: var(--ink-soft); font-size: 13px; margin-top: 40px; }
+
+@media (max-width: 380px) {
+  h1 { font-size: 28px; }
+  .pinpad button { width: 64px; height: 64px; }
+}

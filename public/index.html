@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nyméla HOME · Junta 8 sellos y recibe un regalo</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/vendor/qrcode.js"></script>
+<script src="/vendor/jsQR.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <header class="brand">
+    <div class="brand-name">Nyméla <span>HOME</span></div>
+    <div class="brand-tag">crafted with love &amp; soft light</div>
+  </header>
+
+  <!-- INICIO -->
+  <section id="view-home" class="view">
+    <h1>Junta 8 sellos<br>y recibe un regalo</h1>
+    <p class="lead">Cada compra te acerca a una vela gratis. Nyméla HOME te pone un sello por cada compra.</p>
+    <button class="btn big" data-go="client-start">Soy clienta</button>
+    <button class="btn big ghost" data-go="owner-pin">Soy Nyméla HOME</button>
+    <p class="hint">¿Ya tienes tu tarjeta? <a href="#" data-go="client-lookup">Ver mi tarjeta con mi código</a></p>
+  </section>
+
+  <!-- CLIENTA: REGISTRO -->
+  <section id="view-client-start" class="view hidden">
+    <button class="back" data-go="home">← Volver</button>
+    <h2>Empieza a juntar tus sellos</h2>
+    <p class="lead">Yo creo mi tarjeta con mi nombre. Nyméla HOME me pone un sello cada vez que compro.</p>
+    <form id="form-register">
+      <label>Mi nombre
+        <input type="text" id="reg-name" required maxlength="60" placeholder="Escribe tu nombre" autocomplete="name">
+      </label>
+      <label>Mi cumpleaños <span class="optional">(opcional, para mi regalo)</span>
+        <input type="date" id="reg-birthday">
+      </label>
+      <button class="btn big" type="submit">Crear mi tarjeta</button>
+    </form>
+    <p class="error hidden" id="reg-error"></p>
+  </section>
+
+  <!-- CLIENTA: BUSCAR POR CÓDIGO -->
+  <section id="view-client-lookup" class="view hidden">
+    <button class="back" data-go="home">← Volver</button>
+    <h2>Ver mi tarjeta</h2>
+    <p class="lead">Escribo el código de mi tarjeta, por ejemplo NH-ABC123.</p>
+    <form id="form-lookup">
+      <label>Mi código
+        <input type="text" id="lookup-code" required maxlength="10" placeholder="NH-XXXXXX" style="text-transform:uppercase">
+      </label>
+      <button class="btn big" type="submit">Ver mi tarjeta</button>
+    </form>
+    <p class="error hidden" id="lookup-error"></p>
+  </section>
+
+  <!-- CLIENTA: MI TARJETA -->
+  <section id="view-client-card" class="view hidden">
+    <button class="back" data-go="home">← Salir</button>
+    <div class="card">
+      <div class="card-brand">Nyméla <span>HOME</span></div>
+      <div class="card-name" id="card-name"></div>
+      <div class="card-code" id="card-code"></div>
+      <div class="card-qr" id="card-qr"></div>
+      <p class="card-qr-note">Muestra este QR cuando compres para que Nyméla HOME te ponga tu sello.</p>
+      <div class="stamps" id="card-stamps"></div>
+      <p class="card-count" id="card-count"></p>
+      <p class="card-gift hidden" id="card-gift"></p>
+      <p class="card-birthday hidden" id="card-birthday"></p>
+    </div>
+    <h3>Mis sellos</h3>
+    <ul class="history" id="card-history"></ul>
+    <p class="hint">Tu tarjeta vive en el servidor de Nyméla HOME: tu código funciona desde cualquier celular.</p>
+  </section>
+
+  <!-- DUEÑA: PIN -->
+  <section id="view-owner-pin" class="view hidden">
+    <button class="back" data-go="home">← Volver</button>
+    <h2>Acceso de Nyméla HOME</h2>
+    <p class="lead">Solo Nyméla HOME entra aquí, con su PIN.</p>
+    <div class="pin-dots" id="pin-dots"><span></span><span></span><span></span><span></span></div>
+    <div class="pinpad" id="pinpad">
+      <button data-digit="1">1</button><button data-digit="2">2</button><button data-digit="3">3</button>
+      <button data-digit="4">4</button><button data-digit="5">5</button><button data-digit="6">6</button>
+      <button data-digit="7">7</button><button data-digit="8">8</button><button data-digit="9">9</button>
+      <button data-action="clear">C</button><button data-digit="0">0</button><button data-action="back">⌫</button>
+    </div>
+    <p class="error hidden" id="pin-error"></p>
+  </section>
+
+  <!-- DUEÑA: PANEL -->
+  <section id="view-owner" class="view hidden">
+    <div class="owner-head">
+      <h2>Acceso de Nyméla HOME</h2>
+      <button class="btn small ghost" id="btn-logout">Cerrar acceso</button>
+    </div>
+
+    <div class="owner-actions">
+      <button class="btn" data-go="scan">Escanear el QR de una clienta</button>
+      <button class="btn ghost" data-go="walkin">Poner el sello de quien ya compró</button>
+    </div>
+
+    <div class="birthdays" id="birthdays-box">
+      <h3>Cumpleaños</h3>
+      <div id="birthdays-today"></div>
+      <div id="birthdays-upcoming"></div>
+    </div>
+
+    <h3>Clientas</h3>
+    <input type="search" id="owner-search" placeholder="Buscar por nombre o código..." autocomplete="off">
+    <ul class="clients" id="owner-clients"></ul>
+    <p class="hint" id="owner-empty">Todavía no hay clientas registradas.</p>
+  </section>
+
+  <!-- DUEÑA: ESCANEAR -->
+  <section id="view-scan" class="view hidden">
+    <button class="back" data-go="owner">← Volver al panel</button>
+    <h2>Escanear el QR de una clienta</h2>
+    <p class="lead">Apunta la cámara al QR de la clienta, o elige una foto de su QR.</p>
+    <div class="scan-box">
+      <video id="scan-video" playsinline muted></video>
+      <canvas id="scan-canvas" class="hidden"></canvas>
+      <p class="hint" id="scan-status">La cámara se enciende al entrar aquí.</p>
+    </div>
+    <label class="btn ghost file-label">Tomar o elegir una foto del QR
+      <input type="file" id="scan-photo" accept="image/*" class="hidden">
+    </label>
+    <form id="form-scan-code">
+      <label>O escribe el código de la clienta
+        <input type="text" id="scan-code" maxlength="10" placeholder="NH-XXXXXX" style="text-transform:uppercase">
+      </label>
+      <button class="btn" type="submit">Abrir su tarjeta</button>
+    </form>
+    <p class="error hidden" id="scan-error"></p>
+  </section>
+
+  <!-- DUEÑA: PONER SELLO DE QUIEN YA COMPRÓ -->
+  <section id="view-walkin" class="view hidden">
+    <button class="back" data-go="owner">← Volver al panel</button>
+    <h2>Poner el sello de quien ya compró</h2>
+    <p class="lead">Nyméla HOME pone el sello aunque la tarjeta no esté en este celular.</p>
+    <form id="form-walkin">
+      <label>Nombre de la clienta
+        <input type="text" id="walkin-name" maxlength="60" placeholder="Nombre de la clienta">
+      </label>
+      <label>Código NH- <span class="optional">(si lo tienes)</span>
+        <input type="text" id="walkin-code" maxlength="10" placeholder="NH-XXXXXX" style="text-transform:uppercase">
+      </label>
+      <button class="btn big" type="submit">Poner sello</button>
+    </form>
+    <div id="walkin-matches" class="hidden">
+      <h3>Hay varias con ese nombre, ¿cuál es?</h3>
+      <ul class="clients" id="walkin-list"></ul>
+    </div>
+    <p class="error hidden" id="walkin-error"></p>
+    <p class="ok hidden" id="walkin-ok"></p>
+  </section>
+
+  <!-- DUEÑA: DETALLE DE CLIENTA -->
+  <section id="view-owner-detail" class="view hidden">
+    <button class="back" data-go="owner">← Volver al panel</button>
+    <div class="card small">
+      <div class="card-brand">Nyméla <span>HOME</span></div>
+      <div class="card-name" id="detail-name"></div>
+      <div class="card-code" id="detail-code"></div>
+      <div class="stamps" id="detail-stamps"></div>
+      <p class="card-count" id="detail-count"></p>
+    </div>
+    <div class="detail-actions">
+      <button class="btn big" id="btn-stamp">+ Sello</button>
+      <button class="btn ghost" id="btn-unstamp">Quitar un sello</button>
+      <button class="btn danger" id="btn-delete">Eliminar clienta</button>
+    </div>
+    <p class="error hidden" id="detail-error"></p>
+    <p class="ok hidden" id="detail-ok"></p>
+    <h3>Historial</h3>
+    <ul class="history" id="detail-history"></ul>
+  </section>
+
+  <div class="toast hidden" id="toast"></div>
+  <footer class="foot">Nyméla HOME · Morelia · @nymelahome</footer>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
