@@ -1,0 +1,19 @@
+# Render + Turso (opción gratis recomendada). La base vive en Turso (SQLite en
+# la nube), así que el disco efímero del plan gratis de Render ya no importa.
+# OJO: en el plan gratis Render duerme la app a los 15 minutos sin tráfico; la
+# primera visita después tarda ~1 minuto en despertar.
+services:
+  - type: web
+    name: sellos-nymela-home
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OWNER_PIN
+        sync: false
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false

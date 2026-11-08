@@ -1,0 +1,1 @@
+{"description":"Sellos digitales de Nyméla HOME: tarjeta de lealtad de 8 sellos con QR, zona de dueña con PIN verificado en el servidor. Standalone, fuera de Muse.","engines":{"node":">=22.5"},"main":"server.js","name":"sellos-nymela-home","scripts":{"start":"node server.js"},"type":"module","version":"1.0.0","dependencies":{"@libsql/client":"^0.18.0"}}
